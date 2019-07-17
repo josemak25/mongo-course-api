@@ -1,0 +1,1 @@
+{"version":3,"file":"courseCrud.js","sourceRoot":"","sources":["../../src/models/courseCrud.ts"],"names":[],"mappings":";;;;;AAAA,oDAA8B;AAEjB,QAAA,OAAO,GAAG;IACrB,OAAO,gBAAM,CAAC,IAAI,CAAC,EAAE,CAAC,CAAC,IAAI,EAAE,CAAC;AAChC,CAAC,CAAC;AAEW,QAAA,OAAO,GAAG,UAAC,EAAU;IAChC,OAAO,gBAAM,CAAC,QAAQ,CAAC,EAAE,CAAC,CAAC;AAC7B,CAAC,CAAC"}

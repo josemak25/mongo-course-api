@@ -7,7 +7,7 @@
 const app = require('../dist/app').default;
 const debug = require('debug')('introduction-to-sql:server');
 const http = require('http');
-
+const connection = require('../dist/db/db').default;
 /**
  * Get port from environment and store in Express.
  */
@@ -81,6 +81,10 @@ function onError(error) {
  */
 
 function onListening() {
+  connection('mongodb://localhost:27017/playground')
+    .then(() => console.log('connected to database successfully'))
+    .catch(e => console.error(e));
+
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
