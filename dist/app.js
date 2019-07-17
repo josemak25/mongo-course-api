@@ -11,7 +11,6 @@ var morgan_1 = __importDefault(require("morgan"));
 var index_1 = __importDefault(require("./routes/index"));
 var users_1 = __importDefault(require("./routes/users"));
 var app = express_1.default();
-console.log(process.env);
 // view engine setup
 app.set('views', path_1.default.join(__dirname, 'views'));
 app.set('view engine', 'jade');
