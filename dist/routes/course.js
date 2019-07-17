@@ -10,7 +10,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var controller = __importStar(require("../controller/course"));
 var router = express_1.Router();
-/* GET users listing. */
+/* GET course listing. */
 router.get('/', controller.getCourses).get('/:id', controller.getCourse);
+router.post('/', controller.createCourse).put('/:id', controller.updateCourse);
+router.delete('/:id', controller.deleteCourse);
 exports.default = router;
 //# sourceMappingURL=course.js.map

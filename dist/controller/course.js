@@ -74,7 +74,60 @@ exports.getCourse = function (req, res) { return __awaiter(_this, void 0, void 0
                 course = _a.sent();
                 if (!course) {
                     return [2 /*return*/, res.status(404).json({
-                            message: "No Course with " + id + " Found"
+                            message: "No Course with ID " + id + " Found"
+                        })];
+                }
+                return [2 /*return*/, res.status(200).json({
+                        message: 'Successful',
+                        course: course
+                    })];
+        }
+    });
+}); };
+exports.createCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var body, course;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                body = req.body;
+                return [4 /*yield*/, model.createOne(body)];
+            case 1:
+                course = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        message: 'Successful',
+                        course: course
+                    })];
+        }
+    });
+}); };
+exports.updateCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var id, course;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                return [4 /*yield*/, model.updateOne(id, req.body)];
+            case 1:
+                course = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        message: 'Successful',
+                        course: course
+                    })];
+        }
+    });
+}); };
+exports.deleteCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var id, course;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                return [4 /*yield*/, model.deleteOne(id)];
+            case 1:
+                course = _a.sent();
+                if (!course) {
+                    return [2 /*return*/, res.status(404).json({
+                            message: "Cannot Delete A Non Exiting Course with ID " + id
                         })];
                 }
                 return [2 /*return*/, res.status(200).json({
