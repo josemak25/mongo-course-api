@@ -44,6 +44,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var model = __importStar(require("../models/courseCrud"));
+var validateCourse_1 = require("../middleware/validateCourse");
+var utilities_1 = require("../utils/utilities");
 exports.getCourses = function (_req, res) { return __awaiter(_this, void 0, void 0, function () {
     var courses;
     return __generator(this, function (_a) {
@@ -53,7 +55,7 @@ exports.getCourses = function (_req, res) { return __awaiter(_this, void 0, void
                 courses = _a.sent();
                 if (!courses.length) {
                     return [2 /*return*/, res.status(404).json({
-                            message: 'Not Record Found'
+                            message: 'No Record Found'
                         })];
                 }
                 return [2 /*return*/, res.status(200).json({
@@ -85,15 +87,23 @@ exports.getCourse = function (req, res) { return __awaiter(_this, void 0, void 0
     });
 }); };
 exports.createCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var body, course;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, error, value, errMessage, course;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                body = req.body;
-                return [4 /*yield*/, model.createOne(body)];
+                _a = validateCourse_1.validateNewCourse(req.body), error = _a.error, value = _a.value;
+                if (error) {
+                    errMessage = utilities_1.constructError(error.details);
+                    return [2 /*return*/, res.status(403).json({
+                            message: 'Unsuccessful',
+                            name: 'ValidationError',
+                            error: errMessage
+                        })];
+                }
+                return [4 /*yield*/, model.createOne(value)];
             case 1:
-                course = _a.sent();
-                return [2 /*return*/, res.status(200).json({
+                course = _b.sent();
+                return [2 /*return*/, res.status(201).json({
                         message: 'Successful',
                         course: course
                     })];
@@ -101,14 +111,23 @@ exports.createCourse = function (req, res) { return __awaiter(_this, void 0, voi
     });
 }); };
 exports.updateCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var id, course;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var id, _a, error, value, errMessage, course;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
                 id = req.params.id;
-                return [4 /*yield*/, model.updateOne(id, req.body)];
+                _a = validateCourse_1.validateUpdateCourse(req.body), error = _a.error, value = _a.value;
+                if (error) {
+                    errMessage = utilities_1.constructError(error.details);
+                    return [2 /*return*/, res.status(403).json({
+                            message: 'Unsuccessful',
+                            name: 'ValidationError',
+                            error: errMessage
+                        })];
+                }
+                return [4 /*yield*/, model.updateOne(id, value)];
             case 1:
-                course = _a.sent();
+                course = _b.sent();
                 return [2 /*return*/, res.status(200).json({
                         message: 'Successful',
                         course: course

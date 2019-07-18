@@ -14,7 +14,9 @@ exports.findOne = function (id) {
     return course_1.default.findById(id).exec();
 };
 exports.updateOne = function (id, course) {
-    return course_1.default.findByIdAndUpdate(id, course, { new: true }).exec();
+    return course_1.default.findByIdAndUpdate(id, course, {
+        new: true
+    }).exec();
 };
 exports.deleteOne = function (id) {
     return course_1.default.findByIdAndDelete(id).exec();
