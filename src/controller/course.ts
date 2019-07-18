@@ -21,18 +21,19 @@ export const getCourses = async (_req: Request, res: Response) => {
 
 export const getCourse = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const course = await model.findOne(id);
 
-  if (!course) {
+  try {
+    const course = await model.findOne(id);
+
+    return res.status(200).json({
+      message: 'Successful',
+      course
+    });
+  } catch (error) {
     return res.status(404).json({
       message: `No Course with ID ${id} Found`
     });
   }
-
-  return res.status(200).json({
-    message: 'Successful',
-    course
-  });
 };
 
 export const createCourse = async (req: Request, res: Response) => {
@@ -71,27 +72,35 @@ export const updateCourse = async (req: Request, res: Response) => {
     });
   }
 
-  const course = await model.updateOne(id, value);
+  try {
+    const course = await model.updateOne(id, value);
 
-  return res.status(200).json({
-    message: 'Successful',
-    course
-  });
+    return res.status(200).json({
+      message: 'Successful',
+      course
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: 'Unsuccessful',
+      error: `No Course with ID ${id} Found`
+    });
+  }
 };
 
 export const deleteCourse = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const course = await model.deleteOne(id);
+  try {
+    const course = await model.deleteOne(id);
 
-  if (!course) {
+    return res.status(200).json({
+      message: 'Successful',
+      course
+    });
+  } catch (error) {
     return res.status(404).json({
-      message: `Cannot Delete A Non Exiting Course with ID ${id}`
+      message: 'Unsuccessful',
+      error: `Cannot Delete A Non Exiting Course with ID ${id}`
     });
   }
-
-  return res.status(200).json({
-    message: 'Successful',
-    course
-  });
 };

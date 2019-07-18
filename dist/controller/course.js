@@ -66,23 +66,27 @@ exports.getCourses = function (_req, res) { return __awaiter(_this, void 0, void
     });
 }); };
 exports.getCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var id, course;
+    var id, course, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                return [4 /*yield*/, model.findOne(id)];
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, model.findOne(id)];
+            case 2:
                 course = _a.sent();
-                if (!course) {
-                    return [2 /*return*/, res.status(404).json({
-                            message: "No Course with ID " + id + " Found"
-                        })];
-                }
                 return [2 /*return*/, res.status(200).json({
                         message: 'Successful',
                         course: course
                     })];
+            case 3:
+                error_1 = _a.sent();
+                return [2 /*return*/, res.status(404).json({
+                        message: "No Course with ID " + id + " Found"
+                    })];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
@@ -111,7 +115,7 @@ exports.createCourse = function (req, res) { return __awaiter(_this, void 0, voi
     });
 }); };
 exports.updateCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var id, _a, error, value, errMessage, course;
+    var id, _a, error, value, errMessage, course, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -125,34 +129,49 @@ exports.updateCourse = function (req, res) { return __awaiter(_this, void 0, voi
                             error: errMessage
                         })];
                 }
-                return [4 /*yield*/, model.updateOne(id, value)];
+                _b.label = 1;
             case 1:
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, model.updateOne(id, value)];
+            case 2:
                 course = _b.sent();
                 return [2 /*return*/, res.status(200).json({
                         message: 'Successful',
                         course: course
                     })];
+            case 3:
+                error_2 = _b.sent();
+                return [2 /*return*/, res.status(404).json({
+                        message: 'Unsuccessful',
+                        error: "No Course with ID " + id + " Found"
+                    })];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.deleteCourse = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-    var id, course;
+    var id, course, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                return [4 /*yield*/, model.deleteOne(id)];
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, model.deleteOne(id)];
+            case 2:
                 course = _a.sent();
-                if (!course) {
-                    return [2 /*return*/, res.status(404).json({
-                            message: "Cannot Delete A Non Exiting Course with ID " + id
-                        })];
-                }
                 return [2 /*return*/, res.status(200).json({
                         message: 'Successful',
                         course: course
                     })];
+            case 3:
+                error_3 = _a.sent();
+                return [2 /*return*/, res.status(404).json({
+                        message: 'Unsuccessful',
+                        error: "Cannot Delete A Non Exiting Course with ID " + id
+                    })];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
